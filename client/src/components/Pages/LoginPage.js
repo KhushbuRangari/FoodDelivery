@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
+
+
+
 function Login() {
   const auth = useAuthContext();
   const [login, setLogin] = useState({});
@@ -25,15 +28,18 @@ function Login() {
  
   };
 
+  function handleVisible() {
+    setIsOffcanvasVisible(false);
+  }
 
-console.log(login);
+
   return (
     <div
     className={`offcanvas offcanvas-end ${isOffcanvasVisible ?"show": ""  }`}
     tabIndex={-1}
     id="offcanvasLogin"
     aria-labelledby="offcanvasLoginLabel"
-    data-bs-dismiss={isOffcanvasVisible ? undefined:"offcanvas" } // Set or remove the attribute based on visibility state
+    data-bs-dismiss={isOffcanvasVisible ?"offcanvas" : undefined} // Set or remove the attribute based on visibility state
   >
       <div className="offcanvas-header">
         <h5 className="offcanvas-title" id="offcanvasLoginLabel">
@@ -59,6 +65,7 @@ console.log(login);
           className="btn-close"
           data-bs-dismiss="offcanvas"
           aria-label="Close"
+          onClick={handleVisible}
         />
       </div>
       <div className="offcanvas-body">

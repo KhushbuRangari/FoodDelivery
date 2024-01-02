@@ -5,8 +5,13 @@ import { useAuthContext } from "../context/AuthContext";
 
 function Navbar() {
   const auth = useAuthContext();
+
+  // const userName1 =auth.localUser.user?."mm"
+
+  // console.log(userName1.username,"navbar names");
   function handleLogout(e) {
-    auth.logout();
+    auth.logout(false);
+    auth.setIsLogged(false)
   }
   return (
     <>
@@ -52,57 +57,51 @@ function Navbar() {
             <ul className="navbar-nav mb-2 mb-lg-0">
 
               
-              <li className="nav-item ">
-                <button
-                  className="btn "
-                  type="button"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvasLogin"
-                  aria-controls="offcanvasLogin"
-                  onClick={handleLogout}
-                >
-                  {" "}
-                  <i className="fa fa-user"></i> Login
-                </button>
-              </li>
-              <li className="nav-item ">
-                <button
-                  className="btn "
-                  type="button"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvasSignup"
-                  aria-controls="offcanvasSignup"
-                >
-                  {" "}
-                  <i className="fa fa-user"></i> Signup
-                </button>
-              </li>
-              <li className="nav-item ">
-                <Link
-                  to={"/"}
-                  onClick={handleLogout}
-                  className="nav-link active"
-                  aria-current="page"
-                >
-                  {" "}
-                  <i className="fa fa-user"></i> Logout
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={""} className="nav-link">
-                  {" "}
+            {auth.isLogged ? (
+              <>
+                <li className="nav-item">
                   <button
-                    className="btn "
+                    className="btn"
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight"
                   >
-                    {" "}
-                    <i className="fa fa-cart-arrow-down"></i> Cart
+                    <i className="fa fa-cart-arrow-down" /> Cart
                   </button>
-                </Link>
-              </li>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/"} className="nav-link" onClick={handleLogout}>
+                    <i className="fa fa-user" /> Logout
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <button
+                    className="btn"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasLogin"
+                    aria-controls="offcanvasLogin"
+                  >
+                    <i className="fa fa-user" /> Login
+                  </button>
+                </li>
+                <li className="nav-item">
+                  <button
+                    className="btn"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasSignup"
+                    aria-controls="offcanvasSignup"
+                  >
+                    <i className="fa fa-user" /> Signup
+                  </button>
+                </li>
+              </>
+            )}
             </ul>
           </div>
         </div>

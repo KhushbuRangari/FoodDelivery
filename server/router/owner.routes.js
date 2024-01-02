@@ -10,6 +10,7 @@ ownerRouter.delete('/delete/:id',jwtVerify, ownerController.deleteOwner);
 ownerRouter.post('/food/add',jwtVerify, ownerController.addFoodItem);
 ownerRouter.put('/food/update/:restaurantId/:id',jwtVerify, ownerController.updateFoodItem);
 ownerRouter.delete('/food/delete/:restaurantId/:id',jwtVerify, ownerController.deleteFoodItem);
+ownerRouter.get('/getAll', ownerController.getAllResaurants);
 // Add more routes as needed
 
 module.exports = ownerRouter;

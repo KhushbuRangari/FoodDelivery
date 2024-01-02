@@ -6,29 +6,32 @@ import { toast } from "react-toastify";
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
+  const[isLogged,setIsLogged]=useState(false)
   const navigate = useNavigate();
   let location = useLocation();
-  useEffect(() => {
-    console.log(user,"UseEffect USer");
-    // const storedUser = localStorage.getItem("user");
-    // if (storedUser) {
-      setUser(user);
-    // }
-  }, []); 
+  const [localUser, setlocalUser] = useState([]);
 
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('user'));
+    if (items) {
+        setlocalUser(items);
+    }
+  }, []);
   const login = async (data) => {
     try {
       const authResult = await axios.post(`${BASE_URL}/user/api/login`, data);
      
-        console.log(authResult.data,"response");
+        // console.log(authResult.data,"response");
       const userObj = {
+        status:true,
         user:authResult.data.user,
         token: authResult.data.token,
       };
       setUser(userObj);
 
-       console.log(userObj,"user object ");
+    //    console.log(userObj,"user object ");
       localStorage.setItem("user", JSON.stringify(userObj));
+      setIsLogged(true);
       toast("Login Successfull");
       navigate((location.state && location.state.from) || "/"); // Check if location.state is truthy
     } catch (error) {
@@ -40,10 +43,14 @@ const useAuth = () => {
   const signUp = async (data) => {
     try {
       let authresult = await axios.post(`${BASE_URL}/user/api/register`, data);
-      let userObj = { ...authresult.user?.user };
-      userObj.token = authresult.user?.token;
+      const userObj = {
+        user:authresult.data.user,
+        token: authresult.data.token,
+      };
+
       setUser(userObj);
-      console.log("Sign Up Successfull");
+      toast("Sign Up Successfull");
+      navigate('/')
     } catch (err) {
       console.error(err);
        toast("Something Wrong");
@@ -51,9 +58,11 @@ const useAuth = () => {
     }
   };
 
-  const logout = () => {
+  const logout = (status) => {
     setUser(null);
+    setIsLogged(status)
+    localStorage.removeItem('user');
   };
-  return { user, login, signUp, logout };
+  return { localUser,user,isLogged,setIsLogged, login, signUp, logout };
 };
 export default useAuth;

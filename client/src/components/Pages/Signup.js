@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from "react";
 import {useAuthContext} from "../../context/AuthContext"
 
+
 function Signup() {
   const auth= useAuthContext();
   const [selectedOption, setSelectedOption] = useState("Customer") ;
-  function onValueChange(event){
-    setSelectedOption(event.target.value)
+  const[newUser,setnewUser]=useState();
+
+function handleChange(e) {
+  if(e.target.type==='radio'){
+    setSelectedOption(e.target.value)
+  }
+  setnewUser(
+    {
+      ...newUser,
+      [e.target.name]:e.target.value
+    }
+  )
+  
 }
+
 function formSubmit(event) {
   event.preventDefault();
-  
+    auth.signUp(newUser)
   // console.log(auth)
   
 }
@@ -41,6 +54,8 @@ function formSubmit(event) {
               <input
                 type="username"
                 className="form-control"
+                onChange={handleChange}
+                name="username"
                 id="username"
                 placeholder="Enter username"
               />
@@ -48,6 +63,8 @@ function formSubmit(event) {
             <div className="mb-3">
               <input
                 type="email"
+                name="email"
+                onChange={handleChange}
                 className="form-control"
                 id="Email1"
                 aria-describedby="emailHelp"
@@ -58,6 +75,8 @@ function formSubmit(event) {
             <div className="mb-3">
               <input
                 type="password"
+                name="password"
+                onChange={handleChange}
                 className="form-control"
                 id="PasswordSignup"
                 placeholder="Enter Password"
@@ -68,8 +87,9 @@ function formSubmit(event) {
                 <input
                   type="radio"
                   value="Customer"
+                  name="role"
                   checked={selectedOption === "Customer"}
-                  onChange={onValueChange}
+                  onChange={handleChange}
                   
                 />
                 Customer
@@ -78,9 +98,10 @@ function formSubmit(event) {
                 <input
                   type="radio"
                   value="Owner"
+                  name="role"
                   // Checking this radio button if the selected option is "Male"
                   checked={selectedOption === "Owner"}
-                  onChange={onValueChange}
+                  onChange={handleChange}
                 />
                {"  "} Owner
               </label>

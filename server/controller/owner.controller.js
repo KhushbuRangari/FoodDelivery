@@ -178,4 +178,28 @@ exports.deleteFoodItem = async (req, res) => {
     res.status(500).json({ status: error, message: "Internal server error" });
   }
 };
+
+exports.getAllResaurants = async (req,res)=>{
+  const errors = validationResult(req);
+  //   console.log(req.user.user._id,"user ID Controller");
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ status: "error", errors: errors.array() });
+  }
+
+  try {
+   
+    const owner = await Owner.find({});
+   
+    if (!owner) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Owner not found" });
+    }
+
+    res.status(200).json({ status: "success", data: owner });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "error", message: "Internal server error" });
+  }
+}
 // Add more controllers as needed
