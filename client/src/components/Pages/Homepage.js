@@ -4,7 +4,8 @@ import React from "react";
 import useOwnerData from "../../hooks/useOwnerData";
 import CardsGroup from "../util/CardsGroup";
 import CardsSingle from "../util/CardsSingle";
-import Carasoul from "../util/Carasoul";
+import Carousel from "../util/Carousel";
+import CarouselForRest from "../util/CarouselForRest";
 
 function Homepage() {
   const { ownerData, loading, error } = useOwnerData();
@@ -19,27 +20,30 @@ function Homepage() {
 
   // Render your component with the fetched ownerData
   return (
-    <div>
-      <h1>Homepage</h1>
-    <Carasoul item={ownerData}></Carasoul>
+    <div className="container my-3">
+ 
+    <Carousel item={ownerData}></Carousel>
+<hr />
+    <h2 className="text-start fw-bold">Restaurants in Pune</h2>
+    <div className="filter">
+    <ul className="list-group list-group-horizontal">
+      <li className="list-group-item">  <button>filter</button></li>
+      <li className="list-group-item">  <button>filter</button></li>
+      <li className="list-group-item">  <button>filter</button></li>
+      <li className="list-group-item">  <button>filter</button></li>
+    </ul>
+    </div>
       {ownerData.data.map((data,key) => (
         <div key={data.id}>
 
-          <h2>{data.restaurantName}</h2>
-          <ul>Menu Items:
+          <h2 className="fw-bold">{data.restaurantName}</h2>
+       
           <CardsGroup item={data.menuItems} />
-          {  data.menuItems.map((item,key)=>{
-             return ( 
-             <li key={key}>  
-                 <CardsSingle item={item} />
-             </li>
-             
-             )
-            })}
-          </ul>
-        
+      
         </div>
       ))}
+
+    <CarouselForRest item={ownerData}></CarouselForRest>
     </div>
   );
 }
