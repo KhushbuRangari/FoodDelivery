@@ -39,7 +39,7 @@ const register = async (req, res) => {
       token: token,
     });
   } catch (error) {
-    res.status(500).send("Something wrong. .. . ");
+    res.status(500).send(error);
     console.log(`Something went wrong in registration api ${error}`);
   }
 };
@@ -48,15 +48,16 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     
-    if (email == "" || password == "") {
+    if (email === "" || password === "") {
       return res.status(400).json({
-        message: "please enter all the fields",
+        message: "Please enter all the fields",
       });
     }
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.status(200).json({
-        message: "user not found",
+      return res.status(401).json({
+        status:false,
+        message: "USER NOT FOUND",
       });
     }
 
@@ -72,10 +73,11 @@ const login = async (req, res) => {
           token,
         });
       } else {
-        return res.status(400).send("password not matched");
+        return res.status(401).send("password not matched");
       }
     } else {
-      return res.status(400).json({
+      return res.status(401).json({
+        status:false,
         message: "Password is incorrect",
       });
     }

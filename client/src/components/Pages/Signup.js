@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {useAuthContext} from "../../context/AuthContext"
 
 
 function Signup() {
   const auth= useAuthContext();
   const [selectedOption, setSelectedOption] = useState("Customer") ;
-  const[newUser,setnewUser]=useState();
+  const[newUser,setnewUser]=useState({
+    username:"",
+    email:"",
+    password:"",
+    role:"Customer"
+  });
 
 function handleChange(e) {
   if(e.target.type==='radio'){
@@ -14,12 +19,12 @@ function handleChange(e) {
   setnewUser(
     {
       ...newUser,
-      [e.target.name]:e.target.value
+      [e.target.name]:e.target.value,
+
     }
   )
   
 }
-
 function formSubmit(event) {
   event.preventDefault();
     auth.signUp(newUser)

@@ -3,13 +3,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../ConnectionServer"; // Make sure to import your BASE_URL
-import { useAuthContext } from "../context/AuthContext";
 
 const useOwnerData = () => {
   const [ownerData, setOwnerData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
 
 
   useEffect(() => {

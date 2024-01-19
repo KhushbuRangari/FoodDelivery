@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useCartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
+
 import { toast } from "react-toastify";
 
-function CardsGroup({ item, restId, restName }) {
-  const [quantity, setQuantity] = useState(1);
+function CardsGroupSort({ item, restId, restName }) {
   const { cart, updateCart } = useCartContext();
+  const [quantity, setQuantity] = useState(1);
 
   function handlePlus() {
     setQuantity((prev) => prev + 1);
@@ -14,10 +15,11 @@ function CardsGroup({ item, restId, restName }) {
   function handleMinus() {
     setQuantity((prev) => (prev >= 1 ? prev - 1 : 0));
   }
+
   const handleAddToCart = () => {
     // Check if the item is already in the cart
     const existingCartItemIndex = cart.findIndex(
-      (cartItem) => cartItem.item._id === item._id && cartItem.restId === restId
+      (cartItem) => cartItem.item.id === item.id && cartItem.restId === restId
     );
 
     if (existingCartItemIndex !== -1) {
@@ -27,52 +29,35 @@ function CardsGroup({ item, restId, restName }) {
       updateCart(updatedCart);
       toast("Product Added");
     } else {
-      // Check if the cart is not empty and if the existing items belong to the same restaurant
-      const isSameRestaurant = cart.length > 0 && cart[0].restId === restId;
-
-      if (isSameRestaurant) {
-        // Item is not in the cart, add it
-        const newItem = {
-          restId,
-          restName,
-          quantity,
-          item,
-        };
-        const newCart = [...cart, newItem];
-        updateCart(newCart);
-        toast("Product Added");
-      } else {
-        // Clear the cart and add the new item
-        const newCart = [
-          {
-            restId,
-            restName,
-            quantity,
-            item,
-          },
-        ];
-        updateCart(newCart);
-        toast("Product Added");
-      }
+      // Item is not in the cart, add it
+      const newItem = {
+        restId,
+        restName,
+        quantity,
+        item,
+      };
+      const newCart = [...cart, newItem];
+      updateCart(newCart);
+      toast("Product Added");
     }
   };
 
-  // console.log(item);
-
+  // console.log(cart,"Cart sort");
   return (
-    <div className="card-group mb-3 h-5">
-      <div className="card mx-3">
+    <div className="card-group mb-3 h-5   ">
+      <div key={item._id} className="card mx-3">
+        <h5 className="card-title">{item.restaurantName}</h5>
         <span style={{ borderRadius: "25px" }}>
           <Link to={`/product/${item._id}`} style={{ textDecoration: "none" }}>
             <img src={item.imageURL} className="card-img-top" alt="Card" />
           </Link>
         </span>
         <div className="card-body">
-          <h6><i class="fa fa-cutlery" aria-hidden="true"></i> &nbsp;{restName}</h6>
+          <h6><i class="fa fa-cutlery" aria-hidden="true"></i>  {restName}</h6>
           <h5 className="card-title">{item.name}</h5>
           <h5 className="card-text fw-bold">&#8377;{item.price}</h5>
-          <div className="d-flex justify-content-center me-auto">
-            {/* <h6>Quantity   &nbsp;</h6> */}
+          <div className="d-flex justify-content-center   me-auto">
+            {/* <h5>Quantity  &nbsp;</h5> */}
             <div
               className="plus"
               onClick={handlePlus}
@@ -102,11 +87,11 @@ function CardsGroup({ item, restId, restName }) {
             </div>
           </div>
         </div>
-        <div className="card-footer">
+        <div className="card-footer ">
           <small className="text-muted">
             <button
-              className="w-100 btn btn-block btn-primary"
               onClick={handleAddToCart}
+              className="w-100 btn btn-block btn-primary"
             >
               Add to Cart
             </button>
@@ -117,4 +102,4 @@ function CardsGroup({ item, restId, restName }) {
   );
 }
 
-export default CardsGroup;
+export default CardsGroupSort;

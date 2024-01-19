@@ -202,4 +202,72 @@ exports.getAllResaurants = async (req,res)=>{
     res.status(500).json({ status: "error", message: "Internal server error" });
   }
 }
-// Add more controllers as needed
+
+
+
+exports.getResaurantsById = async (req,res)=>{
+  const errors = validationResult(req);
+  //   console.log(req.user.user._id,"user ID Controller");
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ status: "error", errors: errors.array() });
+  }
+
+  try {
+   
+    const ownerId = req.params.id; // Assuming you pass the owner ID as a parameter in the route
+    console.log((ownerId));
+    const owner = await Owner.findById(ownerId);
+     console.log(owner);
+    if (!owner) {
+      return res.status(404).json({ status: false, message: 'Owner not found' });
+    }
+
+    res.status(200).json({ status:true, owner });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "error", message: "Internal server error" });
+  }
+}
+
+exports.findFoodById = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ status: "error", errors: errors.array() });
+  }
+
+  try {
+    const owner = await Owner.findOne({
+      'menuItems._id': req.params.foodId,
+    });
+
+    if (!owner) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Owner not found" });
+    }
+   
+    const foodItem = owner.menuItems.id(req.params.foodId);
+    // console.log(foodItem);
+    if (!foodItem) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Food item not found" });
+    }
+
+    const rest= {
+      restaurantName: owner.restaurantName,
+      cuisineType:owner.cuisineType,
+      address: owner.address,
+      status:owner.status,
+      phone: owner.phone,
+      description: owner.description,
+      ownerId: owner.ownerId,
+    }
+    res.status(200).json({ status: "success", foodItem ,rest});
+  } catch (error) {
+    res.status(500).json({ status: "error", message: "Internal server error" });
+  }
+};
+
+
+

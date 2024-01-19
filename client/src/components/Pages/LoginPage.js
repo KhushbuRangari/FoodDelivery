@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 
 
@@ -23,6 +22,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // console.log(login,"Login Submit");
     auth.login(login);
     setIsOffcanvasVisible(false); // Set the visibility state to false
  

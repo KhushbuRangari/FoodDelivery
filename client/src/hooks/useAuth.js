@@ -21,7 +21,8 @@ const useAuth = () => {
     try {
       const authResult = await axios.post(`${BASE_URL}/user/api/login`, data);
      
-        // console.log(authResult.data,"response");
+      // console.log(authResult.data.status,"login auth");
+
       const userObj = {
         status:true,
         user:authResult.data.user,
@@ -29,19 +30,19 @@ const useAuth = () => {
       };
       setUser(userObj);
 
-    //    console.log(userObj,"user object ");
       localStorage.setItem("user", JSON.stringify(userObj));
       setIsLogged(true);
       toast("Login Successfull");
       navigate((location.state && location.state.from) || "/"); // Check if location.state is truthy
     } catch (error) {
-      toast("Something Wrong");
+      toast(`${error.response.data.message}`);
       console.error(error);
     }
   };
 
   const signUp = async (data) => {
     try {
+      console.log(data);
       let authresult = await axios.post(`${BASE_URL}/user/api/register`, data);
       const userObj = {
         user:authresult.data.user,
