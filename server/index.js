@@ -12,6 +12,7 @@ dotENV.config();
 const dbConnection = require('./dbConnection');
 dbConnection();
 
+const path = require('path');
 
 
 
@@ -27,6 +28,13 @@ app.use('/owner',ownerRouter);
 const orderRouter=require("./router/order.routes");
 app.use('/order',orderRouter);
 
+// Serve static files from the 'build' directory
+app.use(express.static(path.join(__dirname, 'build')));
+
+// Handle other routes by serving the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.listen(PORT,()=>{
     try {
