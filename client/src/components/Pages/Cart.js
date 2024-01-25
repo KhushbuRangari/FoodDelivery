@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAuthContext } from "../../context/AuthContext"; // Update the import path
-import useOwnerData from '../../hooks/useOwnerData';
+// import { useAuthContext } from "../../context/AuthContext"; // Update the import path
+// import useOwnerData from '../../hooks/useOwnerData';
 
 const Cart = () => {
-  const auth = useAuthContext();
-  const {cart}=useOwnerData();
+  // const auth = useAuthContext();
+  // const {cart}=useOwnerData();
 
   // if (!auth.isLogged) {
   //   return <h2 style={{marginTop:"20%"}}>Please log in to view your shopping cart.</h2>;
@@ -37,13 +37,13 @@ const Cart = () => {
   );
 };
 
-const calculateTotal = (cart) => {
-  return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-};
+// const calculateTotal = (cart) => {
+//   return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+// };
 
-const handleCheckout = () => {
-  // Implement your checkout logic here
-  alert('Checkout clicked! Implement your checkout logic.');
-};
+// const handleCheckout = () => {
+//   // Implement your checkout logic here
+//   alert('Checkout clicked! Implement your checkout logic.');
+// };
 
 export default Cart;

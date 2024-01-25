@@ -29,7 +29,7 @@ function ProductPage() {
     };
 
     fetchData();
-  }, []);
+  });
 
 //   console.log(product.foodItem, "product");
   return (
@@ -43,7 +43,7 @@ function ProductPage() {
             <img
               className="card-img  "
               src={product.foodItem && product.foodItem.imageURL}
-              alt="Card image cap"
+              alt="Card cap"
             />
           </div>
    

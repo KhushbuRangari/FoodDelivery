@@ -1,11 +1,8 @@
 import React from "react";
-import { useAuthContext } from "../context/AuthContext";
-import useOwnerData from "../hooks/useOwnerData";
 import { useCartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
 
 const Offcanvas = () => {
-  const auth = useAuthContext();
   const { cart, removeFromCart } = useCartContext();
 
   const calculateTotal = () => {
@@ -60,9 +57,9 @@ const Offcanvas = () => {
                     <div className="d-flex align-items-center">
                       <img src={item.item.imageURL} className="mr-2" width={"40px"} height={"40px"} alt="" />
                       <div className="">
-                        <a  className="d-block text-dark">
+                        <Link  className="d-block text-dark">
                           {item.item.name}
-                        </a>
+                        </Link>
                       </div>
                     </div></Link>
                   </td>

@@ -9,7 +9,7 @@ import useOwnerData from "../../hooks/useOwnerData";
 
 function RestaurantPage() {
   const { id } = useParams();
-  const { cart, setCart } = useOwnerData();
+  const { setCart } = useOwnerData();
   const [restaurant, setRestaurant] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function RestaurantPage() {
     };
 
     fetchData();
-  }, []);
+  });
 
   return (
     <div className="container mt-5">

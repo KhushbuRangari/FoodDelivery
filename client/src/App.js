@@ -1,6 +1,6 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Homepage from "./components/Pages/Homepage";
 import PageNotFound from "./components/Pages/PageNotFound";
 import Login from "./components/Pages/LoginPage";
@@ -10,19 +10,15 @@ import LoginPage from "./components/Pages/LoginPage";
 import SignupPage from "./components/Pages/Signup";
 import RequireAuth from "./components/RequireAuth";
 import Cart from "./components/Pages/Cart";
-import { useAuthContext, AuthProvider } from "./context/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
+import { AuthProvider } from "./context/AuthContext";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CartProvider } from "./context/CartContext";
 import ProductPage from "./components/Pages/ProductPage";
 import RestaurantPage from "./components/Pages/RestaurantPage";
 
 function App() {
-  //   const { login } = useAuthContext()
-  // // console.log(login);
-  //   const location = useLocation()
-  const notify = () => toast("Wow so easy!");
-  //   const pathName = location.state?.from || '/'
+
   return (
     <div className="App">
       <AuthProvider>

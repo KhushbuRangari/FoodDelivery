@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import Cart from "./Pages/Cart";
+import { Link } from "react-router-dom";
+
 import { useAuthContext } from "../context/AuthContext";
 
 function Navbar() {
@@ -9,7 +9,7 @@ function Navbar() {
 
   function handleLogout(e) {
     auth.logout(false);
-    auth.setIsLogged(false)
+    auth.setIsLogged(false);
   }
   function handleSearchSubmit(e) {
     e.preventDefault();
@@ -20,7 +20,7 @@ function Navbar() {
   function handleSearchTermChange(e) {
     setSearchTerm(e.target.value);
   }
-  
+
   return (
     <>
       <nav className="navbar shadow navbar-expand-lg navbar-light bg-light">
@@ -51,68 +51,66 @@ function Navbar() {
             className="collapse navbar-collapse justify-content-end "
             id="navbarSupportedContent"
           >
-               <form className="d-flex" onSubmit={handleSearchSubmit}>
-            <input
-              className="form-control "
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              style={{ width: "70%" }}
-              value={searchTerm}
-              onChange={handleSearchTermChange}
-            />
-            <button className="btn" type="submit">
-              Search
-            </button>
-          </form>
+            <form className="d-flex" onSubmit={handleSearchSubmit}>
+              <input
+                className="form-control "
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                style={{ width: "70%" }}
+                value={searchTerm}
+                onChange={handleSearchTermChange}
+              />
+              <button className="btn" type="submit">
+                Search
+              </button>
+            </form>
             <ul className="navbar-nav mb-2 mb-lg-0">
-
-              
-            {auth.isLogged ? (
-              <>
-                <li className="nav-item">
-                  <button
-                    className="btn"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight"
-                  >
-                    <i className="fa fa-cart-arrow-down" /> Cart
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <Link to={"/"} className="nav-link" onClick={handleLogout}>
-                    <i className="fa fa-user" /> Logout
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <button
-                    className="btn"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasLogin"
-                    aria-controls="offcanvasLogin"
-                  >
-                    <i className="fa fa-user" /> Login
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className="btn"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasSignup"
-                    aria-controls="offcanvasSignup"
-                  >
-                    <i className="fa fa-user" /> Signup
-                  </button>
-                </li>
-              </>
-            )}
+              {auth.isLogged ? (
+                <>
+                  <li className="nav-item">
+                    <button
+                      className="btn"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight"
+                    >
+                      <i className="fa fa-cart-arrow-down" /> Cart
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <Link to={"/"} className="nav-link" onClick={handleLogout}>
+                      <i className="fa fa-user" /> Logout
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <button
+                      className="btn"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasLogin"
+                      aria-controls="offcanvasLogin"
+                    >
+                      <i className="fa fa-user" /> Login
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasSignup"
+                      aria-controls="offcanvasSignup"
+                    >
+                      <i className="fa fa-user" /> Signup
+                    </button>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

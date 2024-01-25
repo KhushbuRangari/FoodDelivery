@@ -6,9 +6,10 @@ import CardsGroup from "../util/CardsGroup";
 import Carousel from "../util/Carousel";
 import CarouselForRest from "../util/CarouselForRest";
 import CardsGroupSort from "../util/CardsGroupSort";
+import { Link } from "react-router-dom";
 
 function Homepage() {
-  const { ownerData, loading, error,cart,setCart } = useOwnerData();
+  const { ownerData, loading, error,setCart } = useOwnerData();
   const [sortingOption, setSortingOption] = useState("");
   const [sortedData, setSortedData] = useState([]);
 
@@ -62,9 +63,9 @@ function Homepage() {
                 setSortedData(sortedByHighToLowPrice)
               }
     }
-    const s = sortedByHighToLowPrice.map((i)=>{return(
-      i.menuItem
-    )})
+    // const s = sortedByHighToLowPrice.map((i)=>{return(
+    //   i.menuItem
+    // )})
   return (
     <div className="container my-3">
     
@@ -90,22 +91,22 @@ function Homepage() {
                 className="dropdown-menu"
                 aria-labelledby="dropdownMenuButton"
               >
-                <a
+                <Link
                   className="dropdown-item"
                   data-value="lowToHigh"
                   name="lowToHigh"
                   onClick={handleChange}
                 >
                   Sort(Low to High)
-                </a>
-                <a
+                </Link>
+                <Link
                   className="dropdown-item"
                   data-value="highToLow"
                   name="highToLow"
                   onClick={handleChange}
                 >
                   Sort(High to Low)
-                </a>
+                </Link>
               </div>
             </div>
           </li>
