@@ -4,7 +4,7 @@
   command = "npm run build"
   # functions = "netlify/functions"  # Uncomment and adjust if you have serverless functions
   publish = ""
-
+  command = "CI= npm run build"
   # Uncomment if your project is a Single Page Application
   #[[redirects]]
   #  from = "/*"
