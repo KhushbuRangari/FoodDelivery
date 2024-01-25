@@ -1,7 +1,7 @@
 # netlify.toml
 
 [build]
-  command = "npm run build"
+  command = "CI= npm run build"
   # functions = "netlify/functions"  # Uncomment and adjust if you have serverless functions
   publish = ""
 
