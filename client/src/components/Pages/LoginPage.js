@@ -85,7 +85,7 @@ function Login() {
                 />
                 Customer
               </label>
-              <label>
+              <label className="mx-3">
                 <input
                   type="radio"
                   value="Owner"

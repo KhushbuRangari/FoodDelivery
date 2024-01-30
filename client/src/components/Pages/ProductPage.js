@@ -6,7 +6,7 @@ import { BASE_URL } from "../../ConnectionServer";
 
 function ProductPage() {
   const { id } = useParams();
-  const [product, setProduct] = useState([]); // Change here
+  const [product, setProduct] = useState([]); 
 
   useEffect(() => {
     // Check if running on the server

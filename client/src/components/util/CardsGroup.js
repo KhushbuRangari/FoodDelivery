@@ -60,8 +60,8 @@ function CardsGroup({ item, restId, restName }) {
   // console.log(item);
 
   return (
-    <div className="card-group mb-3 h-5">
-      <div className="card mx-3">
+    <div className="card-group  mb-3 h-5">
+      <div className="card mx-3 ">
         <span style={{ borderRadius: "25px" }}>
           <Link to={`/product/${item._id}`} style={{ textDecoration: "none" }}>
             <img src={item.imageURL} className="card-img-top" alt="Card" />
