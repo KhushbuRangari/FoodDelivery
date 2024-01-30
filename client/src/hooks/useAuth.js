@@ -35,8 +35,8 @@ const useAuth = () => {
       toast("Login Successfull");
       navigate((location.state && location.state.from) || "/"); // Check if location.state is truthy
     } catch (error) {
-      toast(`${error.response.data.message}`);
-      console.error(error);
+      toast(`${error.response.data}`);
+      console.error(error.response.data);
     }
   };
 
@@ -49,12 +49,14 @@ const useAuth = () => {
         token: authresult.data.token,
       };
 
+      console.log(authresult);
+
       setUser(userObj);
       toast("Sign Up Successfull");
       navigate('/')
-    } catch (err) {
-      console.error(err);
-       toast("Something Wrong");
+    } catch (error) {
+      console.error(error.response.data);
+       toast(`${error.response.data.message}`);
       console.log("An Error Occuered");
     }
   };

@@ -58,25 +58,6 @@ const filteredData = allMenuItems.filter((menuItem) => {
 });
 
 
-
-  // const filteredData = ownerData.data.filter((restaurant) => {
-
-  //   const allMenuItems = restaurant.menuItems.flat();
-  //   console.log(allMenuItems,"all ");
- 
-  //   const menuItemsMatched = allMenuItems.some((menuItem) =>
-  //     menuItem.name.toLowerCase().includes(searchTerm.toLowerCase())
-  //   );
-  
-  //   const restaurantDetailsMatched =
-  //     restaurant.restaurantName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     restaurant.cuisineType.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     restaurant.address.toLowerCase().includes(searchTerm.toLowerCase());
-  
-  //   // Include the restaurant in results if either menu items or restaurant details match
-  //   return menuItemsMatched || restaurantDetailsMatched;
-  // });
-  
   let sortedFilteredData = [...filteredData];
 
   if (sortingOption === "lowToHigh") {
@@ -160,26 +141,7 @@ const filteredData = allMenuItems.filter((menuItem) => {
 </div>
 
 
-      {/* <div className="justify-content-center">
-        {sortedFilteredData.map((data, index) => (
-          <div key={index} className=" d-flex  flex-wrap justify-content-center" >
-        
-            {data.menuItems.map((item, key) => (
-
-              <> 
-              <CardsGroup
-              key={key}
-              item={item}
-              restId={data._id}
-              restName={data.restaurantName}
-              setCart={setCart}
-            /></>
-              
-            ))}
-          </div>
-        ))}
-      </div> */}
-
+  
       <Carousel item={ownerData}></Carousel>
       <hr />
     </div>
