@@ -44,6 +44,15 @@ function Navbar() {
             <ul className="navbar-nav mb-2 mb-lg-0">
               {auth.isLogged ? (
                 <>
+                <li className="nav-item">
+                    <Link
+                    to={`/profile/${auth.localUser.user._id}`}
+                      className="btn"
+                      type="button"
+                    >
+                      <i className="fa fa-user" /> {auth.localUser?auth.localUser.user.username:"Profile"}
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <button
                       className="btn"
@@ -57,7 +66,7 @@ function Navbar() {
                   </li>
                   <li className="nav-item">
                     <Link to={"/"} className="nav-link" onClick={handleLogout}>
-                      <i className="fa fa-user" /> Logout
+                      <i className="fa fa-sign-out" /> Logout
                     </Link>
                   </li>
                 </>

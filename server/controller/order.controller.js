@@ -14,10 +14,10 @@ exports.createOrder = async (req, res) => {
       ...req.body,
       userId: req.user.user._id, // Assuming the user ID is stored in the JWT token
     });
-    res.status(201).json({ status: 'success', data: order });
+    res.status(201).json({ status: true, data: order });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: error, message: 'Internal server error' });
+    res.status(500).json({ status: false, error,message: 'Internal server error' });
   }
 };
 

@@ -36,6 +36,7 @@ function Homepage() {
   }
   const allMenuItems = ownerData.data.flatMap((restaurant) =>
   restaurant.menuItems.map((menuItem) => ({
+    restaurantId: restaurant._id,
     restaurantName: restaurant.restaurantName,
     ...menuItem,
   }))
@@ -51,7 +52,7 @@ const filteredData = allMenuItems.filter((menuItem) => {
     ownerData.data.some((restaurant) =>
       restaurant.restaurantName.toLowerCase().includes(searchTermLower) ||
       restaurant.cuisineType.toLowerCase().includes(searchTermLower) ||
-      restaurant.address.toLowerCase().includes(searchTermLower)
+      restaurant.address.toLowerCase().includes(searchTermLower) && restaurant._id
     );
 
   return menuItemMatched || restaurantDetailsMatched;
@@ -66,6 +67,7 @@ const filteredData = allMenuItems.filter((menuItem) => {
     sortedFilteredData.sort((a, b) => b.price - a.price);
   }
   
+
 
   return (
     <div className="container my-3">

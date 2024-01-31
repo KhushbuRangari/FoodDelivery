@@ -21,7 +21,7 @@ const jwtVerify = async (req, res, next) => {
         });
       }
       req.user = decoded;
-      console.log(req.user,"JWT user");
+      // console.log(req.user,"JWT user");
       next();
     }
   } catch (error) {

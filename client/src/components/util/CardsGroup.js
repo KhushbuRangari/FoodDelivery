@@ -30,7 +30,6 @@ function CardsGroup({ item, restId, restName }) {
       // Check if the cart is not empty and if the existing items belong to the same restaurant
       const isSameRestaurant = cart.length > 0 && cart[0].restId === restId;
 
-      console.log(isSameRestaurant);
       if (isSameRestaurant) {
         // Item is not in the cart, add it
         const newItem = {
@@ -44,6 +43,7 @@ function CardsGroup({ item, restId, restName }) {
         toast("Product Added");
       } else {
         // Clear the cart and add the new item
+   
         const newCart = [
           {
             restId,
@@ -53,7 +53,7 @@ function CardsGroup({ item, restId, restName }) {
           },
         ];
         updateCart(newCart);
-        toast("Product Added");
+        toast("New Resturant - Product Added");
       }
     }
   };
